@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  prometheus-metrics-collector:
+    image: zloytroy/prometheus-metrics-collector:1.0.0
+    container_name: prometheus-metrics-collector
+    environment:
+      - EXPORTER_URL=http://localhost:9100/metrics
+      - PUSHGATEWAY_URL=http://prometheus:9191/metrics/job/exporter
+      - JOB_NAME=kafka
+      - INTERVAL=30
+      - LOG_LEVEL=DEBUG
+    restart: always
